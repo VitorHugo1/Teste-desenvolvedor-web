@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.min.css">
+</head>
+<body>
+
+  <h1>Dados API:</h1>
+  <h3>Tabela de Carros:</h3>
+  <table id="carros">
+    <tr>
+      <th>ID</th>
+      <th>COR</th>
+      <th>MARCA</th>
+      <th>MODELO</th>
+      <th>ID DO MOTOR</th>
+    </tr>
+  </table>
+  <h3>Tabela de Motores:</h3>
+  <table id="motores">
+    <tr>
+      <th>ID</th>
+      <th>CILINDROS</th>
+      <th>LITRAGEM</th>
+      <th>OBSERVACAO</th>
+      <th>POSICIONAMENTO DOS CILINDROS</th>
+    </tr>
+  </table>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    // Fazendo o request
+    axios.get('https://apiintranet.kryptonbpo.com.br/test-dev/exercise-1')
+      .then(function (response) {
+        // Sucesso
+        console.log(response)
+        // Dentro do objeto response, vai ter o data que é os dados da API.
+        let dados = response.data
+        // No caso dessa api são dois arrays
+        let arrayCarros = response.data.carros
+        let arrayMotores = response.data.motores
+        arrayCarros.forEach(carro => {
+          console.log(carro)
+          // Crio um elemento LI para colocar na lista
+          let objCarro = document.createElement('tr')
+          // Crio um span com o valor de cada propriedade do carro e coloco dentro do innerHTML do carro
+          objCarro.innerHTML = 
+            '<th>' + carro.id + '</th>' + 
+            '<th>' + carro.cor + '</th>' + 
+            '<th>' + carro.marca + '</th>' + 
+            '<th>' + carro.modelo + '</th>' + 
+            '<th>' + carro.motor_id + '</th>'
+
+          // Coloco esse elemento como filho do UL de id "carros"
+          document.getElementById('carros').appendChild(objCarro)
+        });
+
+        // TODO: o mesmo com motores
+        /*
+        <th>motor.id</th>
+        <th>motor.cilindros</th>
+        ...
+      */
+
+      })
+      .catch(function (error) {
+        // Erro
+        console.log(error)
+      })
+  </script>
+  <script>
+    // Fazendo o request
+    axios.get('https://apiintranet.kryptonbpo.com.br/test-dev/exercise-1')
+      .then(function (response) {
+        // Sucesso
+        console.log(response)
+        // Dentro do objeto response, vai ter o data que é os dados da API.
+        let dados = response.data
+        // No caso dessa api são dois arrays
+        let arrayCarros = response.data.carros
+        let arrayMotores = response.data.motores
+        arrayMotores.forEach(motor => {
+          console.log(motor)
+          // Crio um elemento LI para colocar na lista
+          let objmotor = document.createElement('tr')
+          // Crio um span com o valor de cada propriedade do carro e coloco dentro do innerHTML do carro
+          objmotor.innerHTML = 
+            '<th>' + motor.id + '</th>' + 
+            '<th>' + motor.posicionamento_cilindros + '</th>' + 
+            '<th>' + motor.cilindros  + '</th>' + 
+            '<th>' + motor.litragem  + '</th>' + 
+            '<th>' + motor.observacao  + '</th>'
+
+          // Coloco esse elemento como filho do UL de id "carros"
+          document.getElementById('motores').appendChild(objmotor)
+        });
+
+        // TODO: o mesmo com motores
+        /*
+        <th>motor.id</th>
+        <th>motor.cilindros</th>
+        ...
+      */
+
+      })
+      .catch(function (error) {
+        // Erro
+        console.log(error)
+      })
+  </script>
+</body>
+</html>
